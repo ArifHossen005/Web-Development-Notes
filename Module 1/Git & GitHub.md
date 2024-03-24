@@ -89,6 +89,12 @@ git clone **link**
 3.git checkout name
 4.git merge origin/name
 
+## Copy & paste 
+
+ctrl+c   =  copy 
+shift+insert = paste
+
+
 
 
 
