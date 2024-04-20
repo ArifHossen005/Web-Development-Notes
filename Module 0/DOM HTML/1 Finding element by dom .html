@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model</title>
+</head>
+<body>
+    <h1 id="num1"></h1>
+    <h1 id="num2"></h1>
+
+    <button class="btn"></button>
+    <button class="btn"></button>
+    <button class="btn"></button>
+    <button class="btn"></button>
+
+    <button name="btn"></button>
+    <button name="btn"></button>
+    <button name="btn"></button>
+    <button name="btn"></button>
+
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+
+    <script>
+    let number1 = document.getElementById('num1');
+    let number2 = document.getElementById('num2');
+
+    number1.innerHTML=('Hello world');
+    number2.innerHTML=('Hello War 2024');
+
+    let allbtn = document.getElementsByClassName('btn');
+    allbtn[1].innerHTML=("button");
+
+    let btna = document.getElementsByName('btn');
+    btna[1].innerHTML=("button 2024");
+
+    let paras = document.getElementsByTagName('p');
+    paras[1].innerHTML=("2 lorem");
+
+
+  
+    </script>
+</body>
+
+
+</html>

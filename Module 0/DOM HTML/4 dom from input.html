@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="number" id="num1">
+    <input type="number"  id="num2"><br><br>
+    <label for="result" id="result">Result</label>
+    <button onclick="calculator()">Add</button>
+
+    <script>
+        function calculator() {
+            let x1 = parseFloat(document.getElementById('num1').value);
+            let x2 = parseFloat(document.getElementById('num2').value);
+            let result = x1 + x2;
+
+            document.getElementById('result').innerHTML = "Result: " + result;
+        }
+    </script>
+    
+</body>
+</html>
