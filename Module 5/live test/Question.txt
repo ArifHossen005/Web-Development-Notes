@@ -1,0 +1,305 @@
+প্রশ্ন
+
+1. 
+
+
+Add a class to a paragraph tag and apply CSS styling to change its size (25px), color (blue), alignment (center), and text transformation (uppercase).
+
+
+
+// Template:(Must use the below template. Do not modify any HTML)
+
+
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+  <head>
+
+
+ <meta charset="UTF-8" />
+
+
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+ <title>Document</title>
+
+
+ <style>
+
+
+   /*Add your css here  */
+
+
+   ----------------------
+
+
+   ----------------------
+
+
+   /*Add your css here  */
+
+
+ </style>
+
+
+  </head>
+
+
+  <body>
+
+
+ <p>I am a Laravel Developer</p>
+
+
+  </body>
+
+
+</html>
+
+
+ 
+
+
+2. 
+
+
+Write a JavaScript function named “printMessage” that prints "I love PHP" in the console. 
+
+
+Call the printMessage function to execute it.
+
+
+
+// Define the printMessage function
+
+
+
+// Call the printMessage function
+
+
+ 
+
+
+// Output in the console: 
+
+
+I love PHP
+
+
+ 
+
+
+3. 
+
+
+Write a JavaScript function named “printLanguages” that takes an array of languages as an argument.
+
+
+Inside the function, use a for...of loop to iterate over each element in the array.
+
+
+For each language in the array, print it to the console using console.log().
+
+
+
+// Define the printLanguages function
+
+
+ 
+
+
+// The array of languages
+
+
+const languagesArray = ['PHP', 'JavaScript', 'Python'];
+
+
+
+// Call the printLanguages  function with the array (languagesArray) as argument
+
+
+ 
+
+
+// Output in the console:
+
+
+PHP
+
+
+JavaScript
+
+
+Python
+
+
+ 
+
+
+4. 
+
+
+Create a JavaScript function that toggles dark mode when a button is clicked. Primarily, the h1 text is black and the background is white by default. No need to apply any CSS for the initial state.  
+
+
+In dark mode, the text color of an <h1> element changes to white and the background color of the <body> element changes to black.
+
+
+
+Add a CSS class inside the style tag of your template for the dark mode called “dark-mode”  to change the text color of the <h1> element to white and the background color of the <body> element to black. 
+
+
+
+Write a JavaScript function named “applyDarkMode” that toggles mode when called.
+
+
+Inside the function, toggle “dark-mode” CSS class in the body tag of your template.
+
+
+Ensure that the function is fired when the button is clicked.
+
+
+
+// Template: (Must use the below template. Do not modify any HTML or CSS)
+
+
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+  <head>
+
+
+ <meta charset="UTF-8" />
+
+
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+ <title>Dark Mode Toggle</title>
+
+
+
+ <style>
+
+
+ /* Apply CSS Here For The Dark Mode */
+
+
+ —---------------
+
+
+ —---------------
+
+
+/* Apply CSS Here For The Dark Mode */
+
+
+ </style>
+
+
+  </head>
+
+
+ <body id="body">
+
+
+ <h1>PHP</h1>
+
+
+ <button id="switchModeBtn">Switch Mode</button>
+
+
+
+ <script>
+
+
+ // Define the applyDarkMode function
+
+
+   
+
+
+   // Add event listener to the Switch Mode button to trigger the applyDarkMode           function
+
+
+   
+
+
+ </script>
+
+
+  </body>
+
+
+</html>
+
+
+
+Submission Guidelines:
+
+
+Must check your code that it gives the expected output as per the requirements.
+
+
+Submit your code in the input field like this: (Make sure there is minimum gap at the ending of each task)
+
+
+
+Task 1:
+
+
+—-------------------------
+
+
+—----------------------------
+
+
+—------------------------------
+
+
+
+Task 2:
+
+
+—---------------------------
+
+
+—-----------------------------
+
+
+—--------------------------------
+
+
+
+Task 3:
+
+
+—---------------------------
+
+
+—-----------------------------
+
+
+—--------------------------------
+
+
+
+Task 4:
+
+
+—---------------------------
+
+
+—-----------------------------
+
+
+—--------------------------------
