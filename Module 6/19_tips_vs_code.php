@@ -19,4 +19,12 @@ increment + decrement css value preference
 new tab open  = setting ->preview -> off workbranch 
 
 VSCode Quickly navigate through different files  ctrl+p then search file name 
+ previous tab = ctrl+tab 
+
+ terminal open = ctrl + ~ 
+
+ good font  = 
+
+VSCode Formatting Code 
+
 
