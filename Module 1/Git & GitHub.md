@@ -1,3 +1,9 @@
+### Git config 
+git config --global user.name "Md Arif Hossen"
+git config --global user.email arif@gmail.com
+
+### Create a file 
+touch name
 
 ### New Project Create 
 git init
