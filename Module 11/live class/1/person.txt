@@ -1,0 +1,1 @@
+{"name":"John","age":30,"city":"New York","country":"USA","hobbies":["music","sports"]}{"name":"John","age":30,"city":"New York","country":"USA","hobbies":["music","sports"]}{"name":"John","age":30,"city":"New York","country":"USA","hobbies":["music","sports","art"]}

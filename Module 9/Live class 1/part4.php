@@ -3,12 +3,13 @@
 //property value change manipulation using construct function
 class car
 {
+    public $color = "red";
+
     public function __construct($colorName)
     {
         $this->color = $colorName;
     }
 
-    public $color = "red";
 
     public function drive()
     {
