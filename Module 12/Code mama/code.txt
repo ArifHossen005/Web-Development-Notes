@@ -1,0 +1,89 @@
+Binary Search 
+
+Binary search is a fast search algorithm with run-time complexity of Ο(log n). This search algorithm works on the principle of divide and conquer, since it divides the array into half before searching. For this algorithm to work properly, the data collection should be in the sorted form.
+Binary search looks for a particular key value by comparing the middle most item of the collection. If a match occurs, then the index of item is returned. But if the middle item has a value greater than the key value, the right sub-array of the middle item is searched. Otherwise, the left sub-array is searched. This process continues recursively until the size of a subarray reduces to zero.
+
+
+Binary Search Algorithm
+
+Binary Search algorithm is an interval searching method that performs the searching in intervals only. The input taken by the binary search algorithm must always be in a sorted array since it divides the array into subarrays based on the greater or lower values. The algorithm follows the procedure below −
+
+
+Step 1 − Select the middle item in the array and compare it with the key value to be searched. If it is matched, return the position of the median.
+Step 2 − If it does not match the key value, check if the key value is either greater than or less than the median value.
+Step 3 − If the key is greater, perform the search in the right sub-array; but if the key is lower than the median value, perform the search in the left sub-array.
+Step 4 − Repeat Steps 1, 2 and 3 iteratively, until the size of sub-array becomes 1.
+Step 5 − If the key value does not exist in the array, then the algorithm returns an unsuccessful search.
+
+
+<?php
+// PHP program to implement
+// iterative Binary Search
+
+// An iterative binary search 
+// function
+function binarySearch($arr, $low, 
+                      $high, $x)
+{
+    while ($low <= $high)
+    {
+        $mid = $low + ($high - $low) / 2;
+
+        // Check if x is present at mid
+        if ($arr[$mid] == $x)
+            return floor($mid);
+
+        // If x greater, ignore
+        // left half
+        if ($arr[$mid] < $x)
+            $low = $mid + 1;
+
+        // If x is smaller, 
+        // ignore right half
+        else
+            $high = $mid - 1;
+    }
+
+    // If we reach here, then 
+    // element was not present
+    return -1;
+}
+
+// Driver Code
+$arr = array(2, 3, 4, 10, 40);
+$n = count($arr);
+$x = 10;
+$result = binarySearch($arr, 0, 
+                       $n - 1, $x);
+if(($result == -1))
+echo "Element is not present in array";
+else
+echo "Element is present at index ", 
+                            $result;
+
+// This code is contributed by anuj_67.
+?>
+
+/*
+print(math.floor(3.7))   # Output: 3
+print(math.floor(-2.3))  # Output: -3
+print(math.floor(5.0))   # Output: 5
+print(math.floor(5.1))   # output: 5
+print(math.floor(5.2))  # output: 5
+print(math.floor(5.3))  # output: 5
+print(math.floor(5.4))  # output: 5
+print(math.floor(5.5))  # output: 5
+print(math.floor(5.6))  # output: 5
+print(math.floor(5.7))  # output: 5
+print(math.floor(5.8))  # output: 5
+print(math.floor(5.9))  # output: 5
+print(math.floor(5.0))  # output: 5
+*/
+
+start = 0,end = length - 1;
+
+mid = floor (start + end) / ; // floor means 
+target = 22;
+
+
+

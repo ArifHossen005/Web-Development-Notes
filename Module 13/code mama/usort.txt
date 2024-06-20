@@ -1,0 +1,17 @@
+<?php
+$line1 = trim(fgets(STDIN));
+$line2 = trim(fgets(STDIN));
+$n = (int)$line1;
+$data = explode(" ",$line2);
+usort($data,"arif");
+
+for($i = 0;$i<$n;$i++)
+{
+print $data[$i]." ";
+}
+function arif($a,$b)
+{
+return strlen($a)  - strlen($b);
+}
+
+?>

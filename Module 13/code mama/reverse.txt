@@ -1,0 +1,8 @@
+<?php
+
+fscanf(STDIN,"%s",$str);
+$data = str_split($str);  //etar mane holo string ke potita okkhor re ek ek kore alada kora 
+rsort($data);// reverse kora 
+print implode("",$data);// impode mane alada alada okkhor re jora dewa 
+
+?>
