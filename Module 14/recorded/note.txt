@@ -1,0 +1,11 @@
+function DemoAction14(Request $request)
+    {
+        $name = "cookie_1";
+        $value = "this is my data";
+        $minutes = 60;
+        $path = "/";
+        $domain = $_SERVER['SERVER_NAME'];
+        $secure = true;
+        $httpOnly = true;
+        return response("hello world")->cookie($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
+    }
