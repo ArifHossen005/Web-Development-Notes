@@ -20,8 +20,13 @@ Route::post('/demo8', [FromDataController::class, 'DemoAction8']);
 Route::post('/demo9', [FromDataController::class, 'DemoAction9']);
 Route::post('/demo10', [FromDataController::class, 'DemoAction10']);
 Route::post('/demo11', [FromDataController::class, 'DemoAction11']);
-Route::post('/demo12', [FromDataController::class, 'DemoAction12']);
+Route::get('/demo12', [FromDataController::class, 'DemoAction12']);
 Route::post('/demo13', [FromDataController::class, 'DemoAction13']);
 Route::get('/demo14', [FromDataController::class, 'DemoAction14']);
 Route::get('/demo15', [FromDataController::class, 'DemoAction15']);
 Route::get('/home', [FromDataController::class, 'home']);
+
+use App\Http\Controllers\FileController;
+
+Route::get('/FileBinary', [FileController::class, 'FileBinary']);
+Route::get('/FileDownload', [FileController::class, 'FileDownload']);

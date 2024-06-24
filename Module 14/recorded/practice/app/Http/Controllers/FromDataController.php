@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class FromDataController extends Controller
@@ -45,11 +46,41 @@ class FromDataController extends Controller
     // 9 [Request] Working With Request Cookie
 
 
-    function DemoAction9(Request $request): array
+    function DemoAction9(Request $request): string //array
     {
-
-        return $request->cookie();
+        return $request->cookie('Cookie_1');
+        // return $request->cookie();
     }
+
+
+    //10 [Response] Different Response Format
+
+    function DemoAction10(Request $request): array|string|object|null|int|bool
+    {
+        return true;
+    }
+
+    // 11 [Response] Different Response JSON
+
+    function DemoAction11(Request $request): JsonResponse
+    {
+        $code = 205;
+        $message = "message";
+        $name = "key";
+        $value = "value";
+        $data = array("key" => "value");
+        return response()->json([$message, $data, $code]);
+    }
+
+    // 12 [Response] Redirect Response
+
+    function DemoAction12(Request $request)
+    {
+        return redirect('/demo1');
+    }
+
+
+
 
     // 14 [Response] Cookie Response
 
