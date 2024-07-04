@@ -1,0 +1,63 @@
+=====topic-01====
+note : jaha associative array er modde property taha view te file er modde variable hoiya jabe 
+Example 
+1.controller 
+function Homepage()
+    {
+        $num1 = 10;
+        $num2 = 20;
+        $sum = $num1 + $num2;
+        return view('home', ['dhori' => $sum]);
+    }
+2.View 
+ <p>Our answer is {{$dhori}} </p>
+
+====topic-02=====
+if else 
+Example :
+
+    @if ($marks>5)
+        <h1>Result greater than 5</h1>
+    @elseif ($marks<5)
+        <h1>Result less than 5</h1>
+    @else   
+        <h1>Result equal to 5</h1>
+    @endif
+
+=====assest binding =====
+
+jekono dhoroner asset dewar jonno {{asset('url/path/image')}}
+
+=====switch ====
+
+@switch($marks)
+    @case(5)
+        <h1>Result is 5</h1>
+        @break
+    @case(10)
+        <h1>Result is 10</h1>
+        @break
+    @default
+        <h1>Result is default</h1>
+@endswitch
+
+
+======Component Architecture=====
+means every part er jonno different blade file banabo 
+
+1.view->components->layout.blade.php
+                                  ->Navber.blade.php
+
+====master layout ==== 
+first create a master folder 
+then use @yeild('name')
+then use contant page 
+@extends('folder.page name')
+@section('yeilder name')
+
+@endSection
+
+====for loop===
+@for($i=0;$i<100;$i++)
+hello {{$i}}
+@endFor

@@ -1,0 +1,18 @@
+<?php
+
+fscanf(STDIN, "%s", $inputString);
+
+
+$number = "";
+
+
+for ($i = 0; $i < strlen($inputString); $i++) {
+ 
+    if (is_numeric($inputString[$i])) {
+        $number .= $inputString[$i];
+    }
+}
+
+
+echo $number;
+?>
