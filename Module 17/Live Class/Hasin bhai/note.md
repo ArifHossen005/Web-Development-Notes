@@ -58,7 +58,7 @@ table
        ->email 
        ->ip_address
        ->post_id
-
+new 
 ====Ecommerce===
 Table
 ->Users
@@ -69,4 +69,11 @@ Table
 
 ->orders_item
   id,order_id,product_id,quantity,price
+
+
+===== index kora mane =====
+note : 
+1.kono kichu up method e likhle same jinis down e likhte hobe karon rollback mane delete ,tay delete korte hole down e likhte hobe 
+2.new column add korle up e index korbo  er niche down e dropkorbo 
+3.ja diye amra khoja khuji korbo tar jonno index kortre hoi ,i mean sql field  e jesob command diye khoja khuji korbo tare index korte hoi ,eta migration er age korte hobe ,
 
