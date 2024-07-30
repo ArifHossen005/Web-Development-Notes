@@ -1,0 +1,25 @@
+ORM
+========****======
+all data show 
+ $user=  User::all();
+  return $user;
+
+
+
+========****======
+belongs and  has  means 
+belongs = mane nijer modde ache (peter modde foriegn key  )
+has =  ache but bahire ( peter bahire  foreign key )
+
+========****======
+belongs or  has relationship 
+ 
+
+    function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+ function post()
+    {
+        return $this->hasMany(Post::class);
+    }

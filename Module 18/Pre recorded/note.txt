@@ -1,0 +1,29 @@
+1.All Data Retrive rules
+ DB::table('tables name ')->get();
+2.Single row data write  always come id 1
+        $products = DB::table('brands')->first();
+3.single data row but specific 
+        $products = DB::table('brands')->pluck('brandImg', "brandName");
+
+======Aggregates ====
+          $products = DB::table('products')->count(); //count 
+          $products = DB::table('products')->max('price'); //max 
+          $products = DB::table('products')->min('price'); //min 
+          $products = DB::table('products')->avg('price'); //avg 
+        $products = DB::table('products')->sum('price'); //sum 
+
+=====Select Clause====
+        $products = DB::table('products')->select('title', 'price', 'stock')->distinct()->get();
+=====JOIN=====
+inner join 
+
+join ('child_tables_name','Parents_tables_Name.child_table_id','=','childs_tables_id')->get();
+
+Left join 
+            ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
+RightJoin 
+            ->rightJoin('categories', 'products.category_id', '=', 'categories.id')
+CrossJoin
+            ->crossJoin('brands')->get();
+
+

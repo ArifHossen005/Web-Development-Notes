@@ -1,0 +1,19 @@
+<?php 
+fscanf(STDIN, "%s", $str);
+for ($i = 0; $i < strlen($str); $i++) {
+    $item = $str[$i];
+    if (isSpecial($item)) {
+        $str = substr_replace($str,'', $i, 1);
+    }
+}
+
+function isSpecial($c) {
+    if ($c == "." || $c == "!" || $c == "@" || $c == "#" || $c == "$" || $c == "%" || $c == "^" || $c == "&" || $c == "*" || $c == "(" || $c == ")"|| $c=="/") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+echo $str;
+?>

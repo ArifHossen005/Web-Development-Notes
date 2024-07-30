@@ -1,0 +1,7 @@
+<?php 
+fscanf(STDIN, "%s %d", $str,$n);
+for($i=0;$i<strlen($str);$i++){
+$item = $str[$i];
+print chr(ord($item)+$n);
+}
+?>
