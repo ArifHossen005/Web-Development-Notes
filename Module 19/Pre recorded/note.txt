@@ -1,0 +1,120 @@
+model make  =>   php artisan make:model ProductCart                    product_carts
+
+update/insert er jonno protected $fillable=[];
+
+
+
+===============
+data create kore evabe 
+ public function DemoAction(Request $request)
+    {
+        $brands=Brand::create($request->input());
+        return $brands;
+    }
+}
+
+==============
+data update 
+  public function DemoAction1(Request $request,$id)
+    {
+        $brands=Brand::where('id',$request->id)
+        ->update($request->input());
+        return $brands;
+    }
+
+============
+updateOrCreate 
+
+ public function UpdateOrCreateBrand(Request $request,$id)
+    {
+        $brands=Brand::updateOrCreate(
+            ['brandName'=>$request->brandName],
+            $request->input()
+        );
+        return $brands;
+    }
+==========
+delete
+
+ public function DeleteBrand(Request $request)
+    {
+        $brands = Brand::where('id','=',$request->id)->delete();
+        return $brands;
+    }
+=====
+increment and decrement 
+
+    public function incrementOrDecrement()
+    {
+        $products =Product::where('id',1)->increment('price');
+        return $products;
+        
+    }
+
+============
+all/get method er kaj same all data select kore 
+
+$brands = Brand::get();
+return $brands;
+
+===========
+single table
+
+$brands = Brand::first(); // first id select and if we use find(2) ,2 number id select 
+return $brands;
+
+specific Column show
+
+        $products = Product::pluck('title');// column  data show
+ba chaile 
+        $products = Product::pluck('title','id');// column  data show samne id thakbe 
+==========
+aggregates
+
+$products = Product::count();
+        $products = Product::max('price'); 
+        $products = Product::min('price');
+        $products = Product::avg('price');
+        $products = Product::sum('price');
+        return $products;
+
+===========
+specific kichur jonno select use korte hobe 
+
+    $products = Product::select('id','title','price')->distinct->get();
+    return $products;
+========
+where clause 
+where('price','=','200')->get(); //equal 
+where('price','LIKE','%car%')->get(); //jekhane car ache ta search korbe 
+//not like jar modde nai ta select korbe 
+
+=============
+ordering,grouping,limit 
+
+
+group er kaj korte hole database.php er strict mode re false korte hobe 
+  // $products =  Product::orderBy('id','desc')->get();
+        //$products =  Product::inRandomOrder('id')->get();
+       // $products =  Product::latest('id')->get();
+       // $products =  Product::groupBy('price')->get();
+        $products =  Product::skip(10)->take(2)->get();
+        return $products;
+
+==========
+paginate 
+  $products =  Product::simplePaginate(2);
+        return $
+
+===========
+Relationship 
+
+belongs and  has  means 
+belongs = mane nijer modde ache (peter modde foriegn key  )
+has =  ache but bahire ( peter bahire  foreign key )
+
+
+==========
+data read  in controller 
+
+$products = User::with('tablename')->get();

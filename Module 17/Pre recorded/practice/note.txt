@@ -1,0 +1,39 @@
+Column attribute name 
+1.nullable 
+2.default
+3.first  // column sobar samne asbe 
+4.useCurrent()    // current time nibe 
+5.useCurrentOnUpdate()    // current time set korbe 
+6.unique 
+7.change  //column change 
+8.
+
+delete table          drop_name_table  Schema::rename('oldname','newname');
+rename table        rename_name_table   Schema::dropifExits('oldname','newname');
+
+
+add column 
+ Schema::table('products', function (Blueprint $table) {
+            $table->after('name',function(Blueprint $table){
+                $table->string('image');
+                $table->string('description');
+            });
+        });
+
+rename column 
+php artisan make:migration rename_column_to_profiles
+
+
+then 
+Schema::table('products', function (Blueprint $table) {
+            $table->renameColumn('name','fullName');
+        });
+
+
+php artisan make:migration drop_column_from_profiles
+
+Schema::table('products', function (Blueprint $table) {
+            $table->fropColumn(['name','name']);
+        });
+
+        56
