@@ -16,7 +16,14 @@ steps
 laravel 11
 ->bootstrap/app.php
 ->with middleware er vitore paste korbo 
-       '*'
+      
+
+$middleware->validateCsrfTokens(except: [
+'*'
+]);
+
+
+
 laravel 10
 ->http
 ->middle ware

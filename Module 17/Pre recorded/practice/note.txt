@@ -8,8 +8,8 @@ Column attribute name
 7.change  //column change 
 8.
 
-delete table          drop_name_table  Schema::rename('oldname','newname');
-rename table        rename_name_table   Schema::dropifExits('oldname','newname');
+delete table          drop_name_table  Schema::dropifExits('oldname',);
+rename table        rename_name_table  Schema::rename('oldname','newname');
 
 
 add column 

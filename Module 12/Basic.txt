@@ -58,7 +58,7 @@ Multiple ---SELECT * FROM `students` WHERE `id` IN (5, 4, 7);
 #Join  Query  
 
 Select (jei jei table er data nibo ta likhbo Example - u.FirstName c.LastName) FROM users u LEFT JOIN  categories c ON 
-u.id = g.user_id 
+u.id = c.user_id 
 
 
 

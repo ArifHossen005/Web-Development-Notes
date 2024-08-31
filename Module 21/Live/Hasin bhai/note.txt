@@ -1,0 +1,32 @@
+soci**Security laravel breeze install process
+1.composer require laravel/breeze --dev
+2.php artisan breeze:install
+3.npm install
+4.npm run dev
+5.php artisan migrate
+
+**seeder e fake data create 
+1.uncomment the seeder er up function er 1st line
+2.go to factory   
+
+**route protect with auth means without log i n dont see
+
+way 1 
+  if(!Auth::check())
+        {
+            abort(403,"please logged in");
+        }
+        return response("This is for logged in user ");
+
+way 2 
+Route::get('/secret',[AppController::class,'secretMessage'])->middleware('auth');
+
+
+Dashboard Modify 
+1.$ php artisan make:migration add_social_fields_to_users_table 
+
+up and drop e kaj korbo 
+model update and viladate er kaj korlei hobe 
+
+ {{ __('Welcome ') }} {{auth()->user()->name }} mane user theke direct call korlam 
+{{Auth::->user()->name }} 
