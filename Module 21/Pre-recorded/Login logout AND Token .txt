@@ -1,0 +1,761 @@
+Step To Folow:
+Phase 01
+Developing User Auth Back-End Features
+1.User registration (end point)
+2.User login & issue JWT token (end point)
+3.Sending OTP Code to Email - Password Recover Stage 01 (end point)
+4.Verify OTP Code - Password Recover Stage 02 (end point)
+5.Allow user to reset password - Password Recover Stage 03 (end point)
+6.Allow user to get profile details (end point)
+7.Allow user to update profile details (end point)
+
+
+video-1 (basic)
+1.user Table create (user means je je company eta use korbe )
+		fname,lname,email,password,otp
+2.Model and $fillable,and  protected $attributes = ['otp'=>'0']
+3.Controler create and database name create env file,and controller declare UserRegistration function
+
+
+Video-2 (user Registration)
+
+1.Controller e User Registraion function er kaj korbo 
+
+
+  function UserRegistration(Request $request){
+        try {
+            User::create([
+                'firstName' => $request->input('firstName'),
+                'lastName' => $request->input('lastName'),
+                'email' => $request->input('email'),
+                'mobile' => $request->input('mobile'),
+                'password' => $request->input('password'),
+            ]);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User Registration Successfully'
+            ],200);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'User Registration Failed'
+            ],200);
+
+        }
+    }
+
+2.Route banabo ( i mean Route api) 
+Route::post('/user-registration',[UserController::class,'UserRegistration']);
+
+
+Video-3
+
+video-4 (jwt token issue)
+Steps
+1.composer require firebase/php-jwt
+2.app/ er vitore Helper Directory tar vitore JWTToken class banabo
+3.app/Helper/JWTToken er vitore 2ta Function banabo CreateToken and VerifyToken 
+4.   .env File er modde ekta key create korbo       JWT_KEY = 12345678AAAABBBB*#
+5. CreateToken Function er vitor eta likhbo 
+			
+ public static  function CreateTokenForSetPassword(string $userEmail): string
+    {
+        $key = env('JWT_KEY');
+        $payload = [
+            'iss' => 'laravel-token',//token issuer nam 
+            'iat' => time(), //token creation time 
+            'exp' => time() + 60 * 20, // Token expires in 1 hour
+            'userEmail' => $userEmail,
+            'userID' => '0'
+
+        ];
+
+        return JWT::encode($payload, $key, 'HS256'); //token create korlam 
+    }
+
+6. Token  ekhon verify korbo tar jonno VerifyToken e $token pass korbo then 
+		
+    public static function VerifyToken($token):string|object
+    {
+        try {
+            $key = env('JWT_KEY');
+            $decode = JWT::decode($token,new Key($key,'HS256'));
+            return   $decode->userEmail;;
+        }
+        catch(Exception $e)
+        {
+            return   'unauthorized';
+
+        }
+
+
+
+    }
+
+
+
+Video-5   ( login korle token dibo tay login banabo)
+
+1. Controller vitore  UserLogin function create korbo 
+	
+function UserLogin(Request $request){
+        $count=User::where('email','=',$request->input('email'))
+            ->where('password','=',$request->input('password'))
+            ->select('id')->first();
+
+        if($count!==null){
+            // User Login-> JWT Token Issue
+            $token=JWTToken::CreateToken($request->input('email'),$count->id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User Login Successful'
+            ],200)->cookie( 'token',$token,60*24*30);
+        }
+        else{
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'unauthorized'
+            ],200);
+
+        }
+
+    }
+
+2.UserLogin er jonno Route banabo 
+Route::post('/user-login',[UserController::class,'UserLogin']);
+
+
+Video-6  (User Password Recover )(Forget Password)
+
+email class banate hobe 
+1.php artisan make:mail OTPMail
+2.mail er view er jonno ekta view banabo and content e likhbo otpMail er function er modde 
+ public function content(): Content
+    {
+        return new Content(
+            view: 'email.OTPMail',// view er email directory tar vitore OTPMail blade 
+        );
+    }
+
+3.view er page ta baniye Felbo google theke and mail er otp code ta  parameter akarae nibo 
+   public $otp;
+4.constructor er vitore ($otp)
+$this->otp=$otp; 
+
+
+Video-7 (OTPMail view file setup)
+
+1.email/OTPMail er vitore google theke paste korbo 
+2.{{$otp} view er vitore otp er jaygay eta likhbo 
+3.mail pathanor jonno smtp env te set up korte hobe 
+
+
+MAIL_MAILER=smtp
+MAIL_HOST=mail.teamrabbil.com
+MAIL_PORT=25
+MAIL_USERNAME=info@teamrabbil.com
+MAIL_PASSWORD=~sR4[bhaC[Qs
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="info@teamrabbil.com"
+MAIL_FROM_NAME="${POS}"
+
+4.function banabo send otp 
+    function SendOTPCode(Request $request)
+    {
+        $email=$request->input('email');
+        $otp = rand(1000,9999);// digit 
+
+        $count = User::where('email','=',$email)->count();
+
+        if ($count==1)
+        {
+            //otp email address
+            Mail::to($email)->send(new OTPMail($otp));
+
+            //otp code table insert update
+            User::where('email','=',$email)->update(['otp'=>$otp]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => '4 digit Otp code  send successfully'
+            ],200);
+
+        }
+        else
+        {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'unauthorized'
+            ],200);
+        }
+    }
+
+Video-8 ()
+1.create route 
+Route::post('/send-otp',[UserController::class,'SendOTPCode']);
+
+Video-9  (verify otp)
+
+1.ekta function banabo SS
+
+    function VerifyOTP(Request $request)
+    {
+  
+    }
+2. JWTToken je helper banaisi sekhane ekta function banabo rset pasword er jonno
+	
+  public static  function CreateTokenForSetPassword(string $userEmail): string
+    {
+        $key = env('JWT_KEY');
+        $payload = [
+            'iss' => 'laravel-token',//token issuer nam 
+            'iat' => time(), //token creation time 
+            'exp' => time() + 60 * 20, // Token expires in 1 hour
+            'userEmail' => $userEmail,
+            'userID' => '0'
+
+        ];
+
+        return JWT::encode($payload, $key, 'HS256'); //token create korlam 
+    }
+
+3.VerifyOtp function er kaj korbo 
+
+
+    function VerifyOTP(Request $request)
+    {
+        $email = $request->input('email');
+        $otp= $request->input('otp');
+
+        $count = User::where('email','=',$email)
+            ->where('otp','=',$otp)
+            ->count();
+
+        if ($count==1)
+        {
+            //database otp update
+            User::where('email','=',$email)->update(['otp'=>'0']);
+
+            //password reset issue given with validity time
+            $token=JWTToken::CreateTokenForSetPassword($request->input('email'));
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Otp verification Successful'
+
+            ],200)->cookie( 'token',$token,60*24*30);
+        }
+
+        else
+            {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Your otp code invalid '
+                ],200);
+            }
+
+    }
+
+
+4.Route banabo 
+Route::post('/verify-otp',[UserController::class,'VerifyOTP']);
+
+
+
+
+Video-10 (middleware Create korbo token verification)
+
+1 middle ware banabo.
+php artisan make:middleware TokenVerificationMiddleware
+2.go to file middleware 
+
+    public function handle(Request $request, Closure $next): Response
+    {
+
+        $token=$request->cookie('token');//header diye recieved kora jay
+        $result=JWTToken::VerifyToken($token);
+        if($result=="unauthorized"){
+            return redirect('/userLogin');
+        }
+        else{
+            $request->headers->set('email',$result->userEmail);
+            $request->headers->set('id',$result->userID);
+            return $next($request);
+        }
+
+
+    }
+
+3.Controller e password reset function banabo 
+
+
+    function PasswordReset(Request $request)
+    {
+        try {
+            $email = $request->header('email');
+            $password = $request->input('password');
+            User::where('email','=',$email)->update(['password'=>$password]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Password reset successfully '
+            ],200);
+
+        }
+        catch(Exception $e)
+        {
+            return response()->json([
+                'status' => 'Failed ',
+                'message' => ' Something went wrong '
+            ],200);
+        }
+    }
+
+4.Route banabo 
+Route::post('/password-reset',[UserController::class,'PasswordReset'])->middleware([TokenVerificationMiddleware::class]);
+
+Video-11
+
+Video-12
+
+Forntend
+
+Component-auth=
+===UserLogin 
+===UserRegistration
+===SendOtp
+===VerifyOTP
+===ResetPassword
+
+Component-Dashboard
+===Dashboard
+
+
+Backend
+Config,toast js e add korbo 
+
+Master 
+
+1.ekhon user login form er blade e ajax diye diye call korbo 
+
+
+
+Video-13
+
+1.login-form er view te ajax diye call korbo 
+
+<script>
+    async function SubmitLogin() {
+        let email =document.getElementById('email').value;
+        let password =document.getElementById('password').value;
+
+        if(email.length===0)
+        {
+            errorToast('Please Enter a Email Adress');
+        }
+        else if(password.length===0)
+        {
+            errorToast('Please Enter a password ');
+        }
+
+        else
+        {
+            showLoader();
+            let res=await axios.post("/user-login",{email:email, password:password});
+            hideLoader();
+            if(res.status===200 && res.data['status']==='success'){
+                window.location.href="/dashboard";
+            }
+            else{
+               errorToast(res.data['message']);
+            }
+        }
+    }
+</script>
+
+
+Video-14
+1.Registration korbo tar jonno sei view tw jabo 
+
+and ajax call korbo 
+<script>
+
+
+    async function onRegistration() {
+
+        let email =document.getElementById('email').value;
+        let firstName = document.getElementById('firstName').value;
+        let lastName = document.getElementById('lastName').value;
+        let mobile = document.getElementById('mobile').value;
+        let password = document.getElementById('password').value;
+
+        if(email.length===0)
+        {
+            errorToast('Email is Required ');
+        }
+        else if(password.length===0)
+        {
+            errorToast('password is Required ');
+        }
+        else if(firstName.length===0)
+        {
+            errorToast('First Name is Required ');
+        }
+        else if(lastName.length===0)
+        {
+            errorToast('Last Name is Required ');
+        }
+        else if(mobile.length===0)
+        {
+            errorToast('Mobile Number is Required ');
+        }
+        else{
+            showLoader();
+            let res=await axios.post("/user-registration",{
+                email:email,
+                password:password,
+                firstName:firstName,
+                lastName:lastName,
+                mobile:mobile
+            });
+            hideLoader();
+            if(res.status===200 && res.data['status']==='success')
+            {
+                successToast(res.data['message']);
+                setTimeout(function () {
+                    window.location.href='/userLogin'
+                },2000)
+            }
+            else{
+                errorToast("Registration Failed");
+            }
+        }
+
+    }
+</script>
+
+Video-15
+
+1.sendOTP view page er kaj korbo sendOTp er function name hobe 
+
+
+<script>
+    async function VerifyEmail() {
+        let email = document.getElementById('email').value;
+        if(email.length === 0){
+            errorToast('Please enter your email address')
+        }
+        else{
+            showLoader();
+            let res = await axios.post('/send-otp', {email: email});
+            hideLoader();
+            if(res.status===200 && res.data['status']==='success'){
+                successToast(res.data['message'])
+                sessionStorage.setItem('email', email);
+                setTimeout(function (){
+                    window.location.href = '/verifyOtp';
+                }, 1000)
+            }
+            else{
+                errorToast(res.data['message'])
+            }
+        }
+
+    }
+</script>
+
+
+Video-16
+
+1.verify otp page er kaj korbo 
+
+
+<script>
+    async function VerifyOtp() {
+        let otp = document.getElementById('otp').value;
+        if(otp.length !==4){
+            errorToast('Invalid OTP')
+        }
+        else{
+            showLoader();
+            let res=await axios.post('/verify-otp', {otp: otp,email:sessionStorage.getItem('email')})
+            hideLoader();
+
+            //
+            if(res.status===200 && res.data['status']==='success'){
+                successToast(res.data['message'])
+                sessionStorage.clear();
+                setTimeout(() => {
+                    window.location.href='/resetPassword'
+                }, 1000);
+            }
+            else{
+                errorToast(res.data['message'])
+            }
+        }
+    }
+</script>
+
+
+video-17  
+set new password 
+
+1.reset password view er kaj korbo 
+<script>
+    async function ResetPass() {
+        let password = document.getElementById('password').value;
+        let cpassword = document.getElementById('cpassword').value;
+
+        if(password.length===0){
+            errorToast('Password is required')
+        }
+        else if(cpassword.length===0){
+            errorToast('Confirm Password is required')
+        }
+        else if(password!==cpassword){
+            errorToast('Password and Confirm Password must be same')
+        }
+        else{
+            showLoader()
+            let res=await axios.post("/password-reset",{password:password});
+            hideLoader();
+            if(res.status===200 && res.data['status']==='success'){
+                successToast(res.data['message']);
+                setTimeout(function () {
+                    window.location.href="/userLogin";
+                },1000);
+            }
+            else{
+                errorToast(res.data['message'])
+            }
+        }
+
+    }
+</script>
+
+
+Video-18 (Logout)
+
+1.user controller er modde ekta function banabo 
+
+
+    function UserLogout(){
+        return redirect('/')->cookie('token','',-1);
+    }
+
+2.User logout route banabo 
+Route::get('/logout',[UserController::class,'UserLogout']);
+3.layout er sidenav er view te giye logut section e location dite hobe 
+<a href="{{url("/logout")}}" class="side-bar-item">
+                        <span class="side-bar-item-caption">Logout</span>
+                    </a>
+
+
+
+Video-19
+1.user ke login chara midddleware porer  page e jete dibo nah tay middle ware use korbo route 
+jegula re secure korte chai tar vitore 
+->middleware([TokenVerificationMiddleware::class]);
+->middleware([TokenVerificationMiddleware::class]);
+
+egula diye dibo
+
+Video-20
+
+
+user profile view banate hobe 
+1.view er modde 
+pages.dashboard.profile-page
+2.controller function and web er vitore route banate hobe 
+
+Route::get('/user-profile',[UserController::class,'UserProfile'])->middleware([TokenVerificationMiddleware::class]);
+
+   function UserProfile(Request $request)
+    {
+        $email = $request->header('email');
+        $user  = User::where('email','=',$email)->first();
+        return response()->json([
+            'status' => 'success',
+            'message'=>'Request Successful',
+            'data' => $user
+        ],200);
+    }
+
+
+
+3.profile Update namer ekta function banate hobe 
+
+    function UpdateProfile(Request $request){
+        try{
+            $email=$request->header('email');
+            $firstName=$request->input('firstName');
+            $lastName=$request->input('lastName');
+            $mobile=$request->input('mobile');
+            $password=$request->input('password');
+            User::where('email','=',$email)->update([
+                'firstName'=>$firstName,
+                'lastName'=>$lastName,
+                'mobile'=>$mobile,
+                'password'=>$password
+            ]);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Request Successful',
+            ],200);
+
+        }catch (Exception $exception){
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'Something Went Wrong',
+            ],200);
+        }
+    }
+
+
+
+
+4.user profile view 
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="card animated fadeIn w-100 p-3">
+                <div class="card-body">
+                    <h4>User Profile</h4>
+                    <hr/>
+                    <div class="container-fluid m-0 p-0">
+                        <div class="row m-0 p-0">
+                            <div class="col-md-4 p-2">
+                                <label>Email Address</label>
+                                <input readonly id="email" placeholder="User Email" class="form-control" type="email"/>
+                            </div>
+                            <div class="col-md-4 p-2">
+                                <label>First Name</label>
+                                <input id="firstName" placeholder="First Name" class="form-control" type="text"/>
+                            </div>
+                            <div class="col-md-4 p-2">
+                                <label>Last Name</label>
+                                <input id="lastName" placeholder="Last Name" class="form-control" type="text"/>
+                            </div>
+                            <div class="col-md-4 p-2">
+                                <label>Mobile Number</label>
+                                <input id="mobile" placeholder="Mobile" class="form-control" type="mobile"/>
+                            </div>
+                            <div class="col-md-4 p-2">
+                                <label>Password</label>
+                                <input id="password" placeholder="User Password" class="form-control" type="password"/>
+                            </div>
+                        </div>
+                        <div class="row m-0 p-0">
+                            <div class="col-md-4 p-2">
+                                <button onclick="onUpdate()" class="btn mt-3 w-100  bg-gradient-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    getProfile();
+    async function getProfile(){
+        showLoader();
+        let res=await axios.get("/user-profile")
+        hideLoader();
+        if(res.status===200 && res.data['status']==='success'){
+            let data=res.data['data'];
+            document.getElementById('email').value=data['email'];
+            document.getElementById('firstName').value=data['firstName'];
+            document.getElementById('lastName').value=data['lastName'];
+            document.getElementById('mobile').value=data['mobile'];
+            document.getElementById('password').value=data['password'];
+        }
+        else{
+            errorToast(res.data['message'])
+        }
+
+    }
+
+    async function onUpdate() {
+
+
+        let firstName = document.getElementById('firstName').value;
+        let lastName = document.getElementById('lastName').value;
+        let mobile = document.getElementById('mobile').value;
+        let password = document.getElementById('password').value;
+
+        if(firstName.length===0){
+            errorToast('First Name is required')
+        }
+        else if(lastName.length===0){
+            errorToast('Last Name is required')
+        }
+        else if(mobile.length===0){
+            errorToast('Mobile is required')
+        }
+        else if(password.length===0){
+            errorToast('Password is required')
+        }
+        else{
+            showLoader();
+            let res=await axios.post("/user-update",{
+                firstName:firstName,
+                lastName:lastName,
+                mobile:mobile,
+                password:password
+            })
+            hideLoader();
+            if(res.status===200 && res.data['status']==='success'){
+                successToast(res.data['message']);
+                await getProfile();
+            }
+            else{
+                errorToast(res.data['message'])
+            }
+        }
+    }
+
+</script>
+
+5.route banate hobe 
+Route::post('/user-update',[UserController::class,'UpdateProfile'])->middleware([TokenVerificationMiddleware::class]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
