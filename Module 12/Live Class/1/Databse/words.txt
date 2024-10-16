@@ -1,0 +1,41 @@
+tables students
+column (roll,sec,name)
+
+1.Ekta table er sob data collect korar upay 
+
+SELECT * FROM TABLE_NAME            //* means all column 
+
+2. fixed kono data anar jonno 
+
+SELECT * From students where name='rahim'
+
+3. count ekta method 
+
+SELECT COUNT(roll) FROM students;
+
+4.jodi string check kori 
+
+Select count(*) From students where name like '%e'    //the name ends with the letter 'e'. 
+Select count(*) From students where name like 'e%'    //the name start with the letter 'e'. 
+
+5.data insert korar upaya 
+
+insert into tablesname  ('column name','column name  ') Values ('chair','jjj');
+
+6.delete data 
+
+DELETE from tablesname where id=6;
+
+7.Update korbo 
+update tablesname set name="sakib" where id = 6;
+
+8.specifc column dekhte chai 
+
+SElect roll,name  From students;
+
+9.(The GROUP BY clause groups the rows based on unique values in the Continent column. This means the rows are grouped by continent.
+For each unique continent, the query counts the number of countries.)
+
+SELECT COUNT(*) AS CountryCount, Continent
+FROM country
+GROUP BY Continent;

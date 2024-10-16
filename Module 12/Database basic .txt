@@ -1,0 +1,35 @@
+Basic Databse 
+
+1.All Customers Select 
+
+SELECT * FROM CUSTOMER      
+// select er pore column name From er pore Tables name name 
+
+2.kon jaygar koto jon 
+
+SELECT count(*),city FROM Customer Group by City;  
+//GROUP BY city: This groups the data by the city column. For each unique city, the query will count how many customers belong to that city.
+
+
+
+
+Note :
+SELECT * returns all data (columns and rows).
+SELECT count(*) returns only the number of rows (no actual data from the table).
+
+3.Fixed kono city er koto jon 
+
+SELECT * FROM CUSTOMER Where City="Dhaka";
+
+4. where ..... AND.....OR
+
+5.Multiple table theke data niye asa 
+ SELECT CUSTomer.cust_id , City,FirstName FROM CUSTOMER,individuial  where city="dhaka" and CUSTOMER.CUST_ID=INDIVIDUAL=CUST_id;
+
+6.Join 
+
+SELECT CUSTomer.cust_id , City,FirstName FROM CUSTOMER join individuial  ON CUSTOMER.CUST_ID=INDIVIDUAL=CUST_id where city="dhaka" ;
+
+7.  as mane kono kichur nam dewa 
+8.Having mane AS diye jei nam diyechi tare use kora 
+9.

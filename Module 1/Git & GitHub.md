@@ -100,6 +100,18 @@ git clone **link**
 ctrl+c   =  copy 
 shift+insert = paste
 
+###Git problem solving 
+Problem is - 
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+Solution - 
+steps : 
+1.git fetch origin/master
+2.git fetch origin master 
+3.git status 
+
 
 
 

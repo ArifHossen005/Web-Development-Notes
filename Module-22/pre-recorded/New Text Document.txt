@@ -1,0 +1,24 @@
+====Part-23===
+First category table banabo 
+
+1.php artisan make:migration create_categories_table 
+
+Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',50);
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
+            ->cascadeOnUpdate()->restrictOnDelete();
+            
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+        });
+
+2.same ekta model banabo . Category 
+3.CategoryController Banabo 
+4.Category View banabo page/dashbaord/category 
+5.front end er jonno components/category/create,delete,manage(list),update banabo
+6.then controller er kaj 
+7.route banabo 
+

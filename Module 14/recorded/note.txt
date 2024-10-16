@@ -9,3 +9,6 @@ function DemoAction14(Request $request)
         $httpOnly = true;
         return response("hello world")->cookie($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
     }
+
+
+===Controller er theke routing korbo ====

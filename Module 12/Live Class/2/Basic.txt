@@ -1,0 +1,6 @@
+1.Data insert 
+insert into (`name`,`roll`,`city`) values ("Arif","02","Dhaka")
+
+2.Data delete 
+
+Delete from students where 'id'=2

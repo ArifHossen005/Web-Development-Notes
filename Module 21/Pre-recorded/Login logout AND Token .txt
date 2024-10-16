@@ -55,6 +55,7 @@ video-4 (jwt token issue)
 Steps
 1.composer require firebase/php-jwt
 2.app/ er vitore Helper Directory tar vitore JWTToken class banabo
+app   tarpor directory Helper tarpor class JWTToken.php 
 3.app/Helper/JWTToken er vitore 2ta Function banabo CreateToken and VerifyToken 
 4.   .env File er modde ekta key create korbo       JWT_KEY = 12345678AAAABBBB*#
 5. CreateToken Function er vitor eta likhbo 
@@ -144,7 +145,7 @@ email class banate hobe
 $this->otp=$otp; 
 
 
-Video-7 (OTPMail view file setup)
+Video-7 (OTPMail view file setup)=====user otp setup by mail ====
 
 1.email/OTPMail er vitore google theke paste korbo 
 2.{{$otp} view er vitore otp er jaygay eta likhbo 

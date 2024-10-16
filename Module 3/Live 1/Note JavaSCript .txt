@@ -1,0 +1,17 @@
+====Variable Declare ===
+
+let or const diye declare korbo 
+Example: 
+<script>
+let course = "Master";
+let duration= 6;
+let courseRunning = true;
+
+</script>
+javascript er output console e dekha jay ctrl+shift+i 
+
+Different between let and const 
+
+let = let er variable change kora jay 
+
+const = constant er variable not change 
