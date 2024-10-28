@@ -1,0 +1,24 @@
+1.Git version Check = git -v 
+2.git er sob info ache  = git gui 
+3.git config  = git confiig --global user.name "Your Name"
+	    = git confiig --global user.email "Your Email"
+4.git initialize = git init 
+5.kono kichu add kora = git add .
+		   =git add index.html 
+5.git er modde koita add ache koita commit ache tar jonno = git status 
+	untrack means git er  modde add nai 
+	track means git er modde add ache 
+6.git er ekta present code store = git commit -m "first time "
+7.commit er history dekhar jonno = git log 
+8.git clone =  git clone (link)
+9.git clone =  git clone (link) "folder name"                                                    ekhane amr dewa namer modde sob asbe 
+10.download zip = curl -L -o nameAmrDewa link/archive/main.zip                  (main er  jaygay master o hote pare )
+11.jekono commit e shift howa = git checkout fiofp[d54edas                           (hashuniq ta dibo bracket chara)
+12.git ignore namer ekta file banabo  = .gitignore 
+                etar modde jegula ignore korte chai ta likhe dibo 
+	Example : khh.txt   		    fixed file ta re ignore korbe       
+		*.log		     dot log sob ignore korbe 
+		build/                              build folder sob ignore korbe 
+
+13.Git fork mane copy kore direct amr ggithub e up hobe 
+
