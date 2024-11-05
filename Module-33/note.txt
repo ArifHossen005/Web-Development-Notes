@@ -1,0 +1,46 @@
+1.commit history =  git log 
+2.commit history er short version = git log --online 
+3.commit history er chnages gula = git log state 
+4.commit history er chnages gula = git log --p
+5.fixed date er por commit check kora = git log --after="2024-04-20"
+6.fixed date er modde  commit check kora = git log --after="2024-04-20" --before="2024-04-11"
+7.ke ke commit korse tar history = git log --author="Arif"
+8.filter commmit name =  git log --grep "lknfsn"   (evabe search dile fixed commit er sob asbe )
+==status===
+9.git er modde koita add ache koita commit ache tar jonno = git status 
+	untrack means git er  modde add nai 
+	track means git er modde add ache 
+
+
+===Comapre /different ====
+
+10.compare korbe 2ta commit eer modde  =    git diff hashcode hashcode           
+11.ki ki delete korsi ta dekhabe = git diff 
+12.add kora file abr firiye ana jay  =  git reset    demo.html            (imean file name)
+
+===latest update or commit dekhte ===
+git show HEAD
+git show HEAD~1                    //mane ek step piche 
+
+
+===git tags ====
+git tag vjdjjj                       //means specific kore rakha 
+git tag -a vrffrkf -m "epw"    //tags with message 
+note :git push origin --tags    //tag banaiya eta command dite hobe 
+
+====origin info check ====
+git remote show origin 
+
+
+====Git branch ====
+1.branch create    =      git  branch Name
+2.ek branch theke onno banch e jawar jonno check out korte hoi =
+  	= git checkout JekhaneJaboName     
+3.je branch e push korbo tar origin dibo = 
+		= git push origin Name 
+4.onno branch er code main anar upay  = ami main branch e jabo then 
+	= git merge Name    //name mean jar theke anbo 
+5.delete branch = git branch -d Name            //local 
+6.delete branch =  git push origin --delete Name     //remote ss 
+
+
