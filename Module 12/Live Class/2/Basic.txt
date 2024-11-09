@@ -1,6 +1,19 @@
-1.Data insert 
-insert into (`name`,`roll`,`city`) values ("Arif","02","Dhaka")
+====Join ====
+ left join 
 
-2.Data delete 
+//ami chacchi user table er first name,last and categeory table er name ke 
 
-Delete from students where 'id'=2
+select u.firstName ,u.lastName,c.name From users b LEFT JOIN categories g ON b.id = g.user_id
+
+
+FROM users b LEFT JOIN   categories g 
+//mane user er left e category ke bosalam 
+ON b.id = g.user_id 
+//mane kiser vittite join hobe 
+hints 
+
+select (ki chai kar theke ki chay )
+From (table soho object)mane ey table er sapekkhe 
+JOIN (table soho object)   ki join kore bosabo 
+
+ON b.id = g.user_id      kon relation ba logic 
